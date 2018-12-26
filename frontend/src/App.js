@@ -1,51 +1,21 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import Button from 'antd/lib/button';
+
 import './App.css';
 
-class App extends Component {
-    constructor(props) {
-     super(props);
+import Hamin from './Hamin'
+import Board from './Board'
+import Editor from './Editor'
 
-     this.state = {
-        happy: "뉴욕야시장",
-        text: ""
-    };
-    this.changeInputValue = this.changeInputValue.bind(this)
-  }
-  
-  changeInputValue (e) {
-      console.log("하민", e.target.value)
-      this.setState({
-          happy: e.target.value
-      })
-  }
-  
-    
+
+class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Hello 하민!
-            </a><br></br>    
-            <p>Merry 12 <br></br>
-                First name: <input type="text" name="FirstName" onChange={this.changeInputValue} value={this.state.happy}/><br></br>
-            {this.state.happy}
-                
-                
-                
-            </p>
-        </header><br></br>
-        
+        <Board />
+        <Editor />
+
       </div>
     );
   }
