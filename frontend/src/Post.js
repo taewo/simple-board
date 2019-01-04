@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 
-class Editor extends Component {
+class Post extends Component {
   constructor(props) {
     super(props);
+    console.log(111)
   }
   render() {
     return (
-      <div>Editor</div>
+      <div>Post</div>
     );
   }
 }
 
-export default Editor;
+export default Post;
