@@ -24,6 +24,11 @@ class App extends Component {
       }
     ]
   }
+
+  handleSubmit = (param) => {
+    console.log("handleSubmit", param)
+  }
+
   render() {
     const Root = () => (
       <div>
@@ -41,7 +46,11 @@ class App extends Component {
             path="/board"
             component={() => <Board datas={this.state.datas} />}
           />
-          <Route path="/post" component={Post} />
+          <Route
+            path="/post"
+            component={() => <Post handleSubmit={this.handleSubmit} />}
+            
+          />
         </div>
       </Router>
     );
