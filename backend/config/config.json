@@ -4,10 +4,7 @@
     "password": "test",
     "database": "test",
     "host": "127.0.0.1",
-    "dialect": "mysql",
-    "options": {
-    "operatorsAliases": false
-  }
+    "dialect": "mysql"
   },
   "test": {
     "username": "root",
