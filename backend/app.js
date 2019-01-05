@@ -4,9 +4,11 @@ const morgan = require('morgan')
 const path = require('path')
 const session = require('express-session')
 const flash = require('connect-flash')
+const sequelize = require('./models').sequelize;
 require('dotenv').config()
 
 const app = express()
+sequelize.sync();
 
 app.set('port', process.env.PORT || 8001)
 

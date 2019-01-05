@@ -8,9 +8,9 @@ module.exports = (sequelize, DataTypes) => (
     text: {
       type: DataTypes.STRING(100),
       allowNull: false,
-    }, {
-      timestamps: true,
-      paranoid: true,
     }
+  },{
+    timestamps: true,
+    paranoid: true,
   })
 )
