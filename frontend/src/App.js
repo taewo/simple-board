@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Link } from 'react-router-dom'
+import { Route, Switch } from "react-router-dom";
 
 import './App.css';
 
@@ -25,34 +26,65 @@ class App extends Component {
     ]
   }
 
+  componentDidMount() {
+    console.log(1, this.state.datas)
+  }
+
   handleSubmit = (param) => {
     console.log("handleSubmit", param)
+    const { datas } = this.state
+    this.setState({
+      datas: datas.concat({
+        ...datas,
+        param
+      })
+    })
   }
 
   render() {
     const Root = () => (
       <div>
-        hello world<br/>
-        <div><Link to="/board">게시판</Link></div>
-        <div><Link to="/post">글작성</Link></div>
+        Home<br/>
+      <div>
+        <Link to="/board" params={{ data: "123"}}>게시판</Link>
       </div>
-
-    )
-    return (
-      <Router>
-        <div className="App">
-          <Route exact path="/" component={Root} />
-          <Route 
-            path="/board"
-            component={() => <Board datas={this.state.datas} />}
-          />
+        <div><Link to="/post">글작성</Link></div>
+        {/* <div>
           <Route
-            path="/post"
-            component={() => <Post handleSubmit={this.handleSubmit} />}
-            
+            path="/board"
+            render={props => <Board datas={this.state.datas} />}
           />
-        </div>
-      </Router>
+        </div> */}
+      </div>
+    )
+
+    const that = this;
+    console.log('that...', that)
+    return (
+      <div>
+        <Root />
+        <Router>
+          <div>
+            {/* <Route
+              path="/board"
+              // render={() => (<Board datas={this.state.datas}  />)}
+              component={Board}
+              datas="123"
+              that={this}
+            /> */}
+            <Route
+              path="/board"
+              render={(props) => <Board that={that} datas="hi" {...props}/>}
+            />
+
+            {/* <Route
+              path="/board"
+              render={props => <Board someProp={this.state.datas} {...props} />}
+            /> */}
+            <Route path="/post" component={Post} />
+          </div>
+        </Router>
+      </div>
     );
   }
 }
