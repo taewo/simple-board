@@ -22,15 +22,16 @@ var connection = mysql.createConnection({
 app.use(morgan('dev'))
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 
 connection.connect(function(err) {
   if (err) {
-    console.error('error')
+    console.error('error');
   }
-  console.log('connected as id ', connection.threadId)
-})
+  console.log(connection.threadId + ': mysql connected')
+});
 
 app.set('port', process.env.PORT || 8001)
 
@@ -47,7 +48,37 @@ app.get('/board', function (req, res) {
 
 app.post('/board', function (req, res) {
   console.log('req', req.body)
-  res.send('123')
+  const { writer, title, text } = req.body;
+  connection.query(`insert into board (writer, title, text) values ("${writer}", "${title}", "${text}")`, function(err, rows) {
+    if (err) {
+      console.error('error...', err);
+      return;
+    }
+    res.send(200)
+  })
+})
+
+app.put('/board', function (req, res) {
+  const { idx, writer, title, text } = req.body;
+  connection.query(`update board set writer="${writer}", title="${title}", text="${text}" where id=${idx}`, function(err, rows) {
+    if (err) {
+      console.error('error...', err);
+      return;
+    }
+    res.send(200);
+  })
+})
+
+app.delete('/board', function (req, res) {
+  const { idx } = req.query;
+  console.log('idx', idx)
+  connection.query(`delete from board where id=${idx}`, function (err, rows) {
+    if (err) {
+      console.error('error...', err);
+      return;
+    }
+    res.send(200);
+  })
 })
 
 app.listen(app.get('port'), () => {
