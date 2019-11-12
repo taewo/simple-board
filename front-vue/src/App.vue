@@ -3,6 +3,7 @@
     <img src="./assets/logo.png">
     hello master commit
     test branch1
+    test branch2
     <router-view/>
   </div>
 </template>
