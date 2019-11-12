@@ -2,6 +2,7 @@
   <div id="app">
     <img src="./assets/logo.png">
     hello master commit
+    test branch1
     <router-view/>
   </div>
 </template>
